@@ -16,5 +16,7 @@ email  support (English-speaking & International users): waveofgoals@hotmail.com
 # DOWNLOAD APP:
 
 rustore - https://www.rustore.ru/catalog/app/com.example.wave_offline
+
 google play - soon
+
 app store - soon
