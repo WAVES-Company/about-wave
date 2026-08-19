@@ -2,7 +2,7 @@
 
 developer - maksy
 
-website - https://whymaksy.github.io/wave-docs/
+website - https://waves-company.github.io/about-wave/
 
 telegram channel wave - https://t.me/waveofgoals
 
