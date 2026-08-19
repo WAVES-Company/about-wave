@@ -20,3 +20,6 @@ rustore - https://www.rustore.ru/catalog/app/com.example.wave_offline
 google play - soon
 
 app store - soon
+
+
+© 2026 WAVES Company. All rights reserved.
