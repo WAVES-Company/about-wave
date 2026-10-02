@@ -7,7 +7,8 @@ TELEGRAM CHANNEL - https://t.me/waveofgoals
 
 WAVE SUPPORT - https://t.me/WOFSupport_bot
 
-SITE - https://github.io/WAVES-Company/about-wave
+SITE - https://github.io/WAVES-Company/about-wave/
+
 
 # Download wave:
 
