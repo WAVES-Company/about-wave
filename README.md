@@ -1,3 +1,4 @@
 # About WAVES company:
 
-Creator - maksyd
+Creator - maksy
+
