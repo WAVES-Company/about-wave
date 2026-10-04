@@ -17,5 +17,5 @@ Google Play - https://play.google.com/store/apps/details?id=com.wavescompany.wav
 
 Rustore - https://www.rustore.ru/catalog/app/com.example.wave_offline
 
-AppStore - soon
+iOS - https://waves-company.github.io/wave-site/
 
