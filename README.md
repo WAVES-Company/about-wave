@@ -17,5 +17,5 @@ Google Play - https://play.google.com/store/apps/details?id=com.wavescompany.wav
 
 Rustore - https://www.rustore.ru/catalog/app/com.example.wave_offline
 
-iOS - https://waves-company.github.io/wave-site/
+iOS - https://waves-company.github.io/wave-site/ (In safari you need tap to “Share” and there you need tap to “Add to Home Screen”.)
 
