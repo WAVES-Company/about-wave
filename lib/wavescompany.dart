@@ -1,9 +1,8 @@
 import 'dart:ui';
 import 'dart:math' as math;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:web/web.dart' as web;
+import 'package:wsite/open_link.dart';
+import 'package:wsite/site_docs.dart';
 import 'package:wsite/w+.dart';
 import 'package:wsite/wave.dart';
 import 'package:wsite/waveAi.dart';
@@ -16,17 +15,6 @@ class Wsite extends StatefulWidget {
   
   @override
   State<Wsite> createState() => _WsiteState();
-}
-
-void _openLink(String urlString) {
-  if (kIsWeb) {
-    web.window.open(urlString, '_blank');
-  } else {
-    launchUrl(
-      Uri.parse(urlString), 
-      mode: LaunchMode.externalApplication,
-    );
-  }
 }
 
 class _WsiteState extends State<Wsite> with SingleTickerProviderStateMixin {
@@ -306,7 +294,27 @@ class _WebsiteFooter extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            alignment: WrapAlignment.center,
+            children: [
+              _FooterDocButton(
+                label: "Privacy Policy",
+                builder: (context) => const PrivacyPolicyPage(),
+              ),
+              _FooterDocButton(
+                label: "Terms of Service",
+                builder: (context) => const TermsOfServicePage(),
+              ),
+              _FooterDocButton(
+                label: "FAQ",
+                builder: (context) => const FaqPage(),
+              ),
+            ],
+          ),
+          const SizedBox(height: 28),
           Text(
             "Subscribe to our Telegram channel to get the latest updates before anyone else.",
             textAlign: TextAlign.center,
@@ -333,6 +341,68 @@ class _WebsiteFooter extends StatelessWidget {
   }
 }
 
+
+class _FooterDocButton extends StatefulWidget {
+  final String label;
+  final WidgetBuilder builder;
+
+  const _FooterDocButton({
+    required this.label,
+    required this.builder,
+  });
+
+  @override
+  State<_FooterDocButton> createState() => _FooterDocButtonState();
+}
+
+class _FooterDocButtonState extends State<_FooterDocButton> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: widget.builder),
+          );
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+          transform: Matrix4.identity()..scale(_hovered ? 1.04 : 1.0),
+          transformAlignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: _hovered
+                ? const Color.fromARGB(255, 0, 110, 200)
+                : const Color.fromARGB(255, 0, 110, 200).withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Text(
+            widget.label,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Nunito',
+              color: _hovered
+                  ? Colors.white
+                  : const Color.fromARGB(255, 0, 110, 200),
+              fontVariations: const [
+                FontVariation('wdth', 115),
+                FontVariation('wght', 700),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _TelegramButton extends StatefulWidget {
   const _TelegramButton();
 
@@ -351,7 +421,7 @@ class _TelegramButtonState extends State<_TelegramButton> {
       onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
         onTap: () {
-          _openLink("https://t.me/waveofgoals");
+          openSiteLink("https://t.me/waveofgoals");
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
