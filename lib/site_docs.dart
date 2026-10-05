@@ -26,7 +26,6 @@ class PrivacyPolicyPage extends StatelessWidget {
           heading: 'Information we collect',
           body:
               'When you create an account, we collect only:\n'
-              '• Email address\n'
               '• Name\n'
               '• Username\n'
               '• Profile photo\n\n'
