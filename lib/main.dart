@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wsite/wavescompany.dart';
+import 'package:wsite/site_docs.dart';
+import 'package:wsite/wavesafe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +39,14 @@ class MyApp extends StatelessWidget {
                 WidgetStateProperty.all(Colors.transparent),
           ),
         ),
-      home: const Wsite(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Wsite(),
+        '/privacy': (context) => const PrivacyPolicyPage(),
+        '/terms': (context) => const TermsOfServicePage(),
+        '/faq': (context) => const FaqPage(),
+        '/wavesafe': (context) => const WaveSafe(),
+      },
     );
   }
 }
