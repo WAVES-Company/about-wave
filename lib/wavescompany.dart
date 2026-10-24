@@ -189,6 +189,15 @@ class _WsiteState extends State<Wsite> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                horizontalPadding,
+                                10,
+                                horizontalPadding,
+                                0,
+                              ),
+                              child: const _DownloadBadges(),
+                            ),
                           ],
                         ),
                       ),
@@ -465,6 +474,133 @@ class _TelegramButtonState extends State<_TelegramButton> {
                     FontVariation('wght', 700),
                   ],
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DownloadBadges extends StatelessWidget {
+  const _DownloadBadges();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Wrap(
+      spacing: 14,
+      runSpacing: 14,
+      alignment: WrapAlignment.center,
+      children: [
+        _DownloadBadge(
+          icon: Icons.android_rounded,
+          caption: "GET IT ON",
+          title: "Google Play",
+          url: "https://play.google.com/store/apps/details?id=com.wavescompany.wave",
+        ),
+        _DownloadBadge(
+          icon: Icons.shop_rounded,
+          caption: "DOWNLOAD ON",
+          title: "RuStore",
+          url: "https://www.rustore.ru/catalog/app/com.example.wave_offline",
+        ),
+        _DownloadBadge(
+          icon: Icons.phone_iphone_rounded,
+          caption: "OPEN WEB APP",
+          title: "iPhone & Web",
+          url: "https://waves-company.github.io/wave-site/",
+        ),
+      ],
+    );
+  }
+}
+
+class _DownloadBadge extends StatefulWidget {
+  final IconData icon;
+  final String caption;
+  final String title;
+  final String url;
+
+  const _DownloadBadge({
+    required this.icon,
+    required this.caption,
+    required this.title,
+    required this.url,
+  });
+
+  @override
+  State<_DownloadBadge> createState() => _DownloadBadgeState();
+}
+
+class _DownloadBadgeState extends State<_DownloadBadge> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    const accent = Color.fromARGB(255, 0, 110, 200);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final background = isDark ? Colors.white : const Color(0xFF0E1116);
+    final foreground = isDark ? const Color(0xFF0E1116) : Colors.white;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() => _hovered = false),
+      child: GestureDetector(
+        onTap: () => openSiteLink(widget.url),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          transform: Matrix4.translationValues(0, _hovered ? -3 : 0, 0),
+          constraints: const BoxConstraints(minWidth: 190),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          decoration: BoxDecoration(
+            color: _hovered ? Color.lerp(background, accent, 0.18) : background,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: _hovered ? accent : background,
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: (_hovered ? accent : Colors.black)
+                    .withValues(alpha: _hovered ? 0.30 : 0.14),
+                blurRadius: _hovered ? 22 : 12,
+                offset: Offset(0, _hovered ? 10 : 5),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(widget.icon, size: 30, color: foreground),
+              const SizedBox(width: 12),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.caption,
+                    style: TextStyle(
+                      fontSize: 10.5,
+                      letterSpacing: 1.1,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Nunito',
+                      color: foreground.withValues(alpha: 0.72),
+                    ),
+                  ),
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: 19,
+                      height: 1.15,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Nunito',
+                      color: foreground,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
